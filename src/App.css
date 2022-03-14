@@ -1,38 +1,133 @@
-.App {
+/* Modify Ant Design CSS - Start */
+.ant-layout-content {
+  background-color: white;
+  padding: 40px 20px;
+}
+
+.ant-menu-dark .ant-menu-item:hover,
+.ant-menu-dark .ant-menu-item-active,
+.ant-menu-dark .ant-menu-submenu-active,
+.ant-menu-dark .ant-menu-submenu-open,
+.ant-menu-dark .ant-menu-submenu-selected,
+.ant-menu-dark .ant-menu-submenu-title:hover {
+  background-color: #3500a0;
+}
+
+.ant-menu.ant-menu-dark .ant-menu-item-selected,
+.ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+  background-color: #2f008d;
+  font-weight: bold;
+}
+
+.ant-divider {
+  border: 1px solid #e0e0e0;
+}
+
+.ant-card-body {
+  padding: 12px;
+}
+/* Modify Ant Design CSS - End */
+
+/* Modify Headings - Start */
+h1 {
+  font-weight: bold;
+  font-size: 32px;
+}
+
+h2 {
+  font-weight: bold;
+  font-size: 28px;
+}
+
+h3 {
+  font-weight: bold;
+  font-size: 24px;
+}
+/* Modify Headings - End */
+
+/* Custom Class - Start */
+.app-logo {
+  margin: 0;
+  color: white;
+  margin-right: 20px;
+}
+
+.flex-container {
+  display: flex;
+  align-items: center;
+}
+
+.flex-container.space-between {
+  justify-content: space-between;
+}
+
+.text-center {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.text-right {
+  text-align: right;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.float-right {
+  float: right;
+}
+
+.ellipsis-paragraph {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.grayed-caption {
+  color: #757575;
+}
+
+.mobile-view {
+  display: none !important;
+}
+/* Custom Class - End */
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+  .ant-layout-content {
+    padding: 20px 24px;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media screen and (max-width: 480px) {
+  .ant-layout-content {
+    padding: 20px;
   }
-  to {
-    transform: rotate(360deg);
+
+  h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+
+  .input-search {
+    display: none !important;
+  }
+
+  .mobile-view {
+    display: block !important;
+  }
+
+  .mobile-input-search {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    text-align: center;
+    background-color: #001529;
+    width: 100%;
+    z-index: 9;
   }
 }

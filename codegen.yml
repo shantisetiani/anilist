@@ -1,6 +1,6 @@
 overwrite: true
-schema: "https://anilist.co/graphiql"
-documents: "./src/components/**/*.{ts,tsx}"
+schema: "https://graphql.anilist.co/"
+documents: "./src/query/**/*.{ts,tsx}"
 generates:
   src/generated/graphql.tsx:
     plugins:

@@ -1,0 +1,40 @@
+.small-title {
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.hightlited-content {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.highlight-card-content + .highlight-card-content::after {
+  content: " ";
+  border-left: 2px solid #d7d7d7;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.adult-badge {
+  background-color: rgb(188 11 11);
+  color: white;
+  border-radius: 8px;
+  padding: 2px 6px;
+  margin: 0 0 12px 12px;
+  font-size: 12px;
+}
+
+.edited-at {
+  font-size: 12px;
+  color: #757575;
+}
+
+.header-divider {
+  margin: 0 0 16px !important;
+}
+
+.row-divider {
+  border: 2px solid #e0e0e0 !important;
+}
