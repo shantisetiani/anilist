@@ -13,6 +13,7 @@ export const columns = [
     dataIndex: "media",
     key: "title",
     render: (media: Media, row: any) => (
+      /* Link to Detail page and pass id as a state */
       <Link to={ROUTES.MEDIA_DETAIL} state={{ id: row.id }}>
         {media.title?.userPreferred}
       </Link>

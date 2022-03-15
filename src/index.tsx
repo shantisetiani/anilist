@@ -6,7 +6,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 const client = new ApolloClient({
-  uri: "https://graphql.anilist.co/",
+  uri: process.env.REACT_APP_API_URL,
   cache: new InMemoryCache(),
 });
 

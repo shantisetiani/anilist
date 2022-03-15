@@ -1,46 +1,69 @@
-# Getting Started with Create React App
+# Anilist
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Anilist is a website where you can see any information about all of the Anime and Manga.
 
 ## Available Scripts
+
+To install and run the project in your local computer, you need to do:<br />
+
+1. Open terminal<br />
+2. In your terminal, run command:<br /><br />
+   `git clone git@github.com:shantisetiani/anilist.git`<br />
+   to clone this project.<br /><br />
+   `cd anilist`<br />
+   to go to the project directory. And then:<br /><br />
+   `npm install`<br /><br />
+3. In the project folder, copy and paste `.env.example` file and rename it into `.env`<br />
+4. Input the GraphQl url in REACT_APP_API_URL variable
 
 In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
+Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in the interactive watch mode.<br />
+<br /><br />
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Folder Structure
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+    .
+    ├── ...
+    ├── src                                     # Source Files
+    │   ├── components                          # Reusable components
+    │   │   └── ErrorAlert                      # ErrorAlert Component
+    │   ├── context                             # Contains React Context
+    │   │   └── alert.ts                        # Context for error alert
+    │   ├── generated
+    │   │   └── graphql.tsx                     # Generated graphql variables and functions
+    │   ├── pages
+    │   │   ├── Home                            # Contains components of the Homepage
+    │   │   │   ├── Home.tsx                    # Main component
+    │   │   │   ├── HomeSkeleton.tsx            # Skeleton of Homepage
+    │   │   │   ├── index.tsx                   # Container component
+    │   │   │   └── style.css                   # Contains CSS used in Homepage
+    │   │   ├── MediaDetail                     # Contains components of the Media Detail page
+    │   │   │   ├── MediaDetail.tsx             # Main component
+    │   │   │   ├── MediaDetailSkeleton.tsx     # Skeleton of Media Detail page
+    │   │   │   ├── index.tsx                   # Container component
+    │   │   │   └── style.css                   # Contains CSS used in Media Detail page
+    │   │   └── MediaList                       # Contains components of the Media List page
+    │   │   │   ├── __tests__                   # Contains files for testing purpose
+    │   │   │   ├── column.tsx                  # Column for AntDesign's table
+    │   │   │   ├── index.tsx                   # Container component
+    │   │   │   └── MediaList.tsx               # Main component
+    │   ├── query                               # Contains files of GrapgQl queries
+    │   ├── routes                              # Contains routing of this web, render the router
+    │   ├── utilities                           # Contains reusable functions
+    │   ├── App.css                             # General CSS
+    │   ├── App.tsx                             # Main component of React App, contains main layout
+    │   ├── index.css                           # Main CSS
+    │   ├── index.tsx                           # Rendering ReactDOM and Apollo provider
+    │   ├── setupTests.js                       # Setup for testing purpose
+    │   └── ...
+    └── ...

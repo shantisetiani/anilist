@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import {
   useMediaTrendQuery,
   MediaTrendSort,
@@ -6,12 +6,13 @@ import {
   RecommendationSort,
   useAiringScheduleQuery,
 } from "generated/graphql";
-import ErrorPage from "pages/ErrorPage";
+import { AlertContext } from "context/alert";
 import Home from "./Home";
 import HomeSkeleton from "./HomeSkeleton";
 import "./style.css";
 
 const HomeContainer: React.FC = () => {
+  /* Get Datas - Start */
   const {
     data: mediaTrend,
     error: mediaTrendError,
@@ -35,11 +36,18 @@ const HomeContainer: React.FC = () => {
   } = useRecommendationQuery({
     variables: { sort: RecommendationSort.RatingDesc },
   });
+  /* Get Datas - End */
 
-  if (mediaTrendError || airingError || recommendationError) {
-    return <ErrorPage />;
-  }
+  const alertContext = useContext(AlertContext);
 
+  /* Show error alert */
+  useEffect(() => {
+    if (mediaTrendError || airingError || recommendationError) {
+      alertContext.setAlert(true);
+    }
+  }, [mediaTrendError, airingError, recommendationError]);
+
+  /* Show skeleton while loading */
   if (mediaTrendLoading || airingLoading || recommendationLoading) {
     return <HomeSkeleton />;
   }

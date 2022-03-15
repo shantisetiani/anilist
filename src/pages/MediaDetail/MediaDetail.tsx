@@ -9,10 +9,12 @@ interface MediaDetailProps {
 }
 
 const MediaDetail: React.FC<MediaDetailProps> = ({ mediaDetail }) => {
+  /* All time rank with type "RATED" */
   const ratedRank = mediaDetail?.Media?.rankings?.find(
     (rank) => rank?.allTime && rank.type === "RATED"
   );
 
+  /* All time rank with type "POPULAR" */
   const popularRank = mediaDetail?.Media?.rankings?.find(
     (rank) => rank?.allTime && rank.type === "POPULAR"
   );
@@ -171,6 +173,7 @@ const MediaDetail: React.FC<MediaDetailProps> = ({ mediaDetail }) => {
     </>
   );
 
+  /* End of the aired date of the media */
   const endDate = mediaDetail?.Media?.endDate?.month
     ? `${toMonthString(mediaDetail.Media.endDate.month)} ${
         mediaDetail.Media.endDate.day

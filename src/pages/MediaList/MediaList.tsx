@@ -30,13 +30,13 @@ const MediaList: React.FC<MediaListProps> = ({
 }) => {
   const statusList = Object.values(MediaListStatus);
 
+  /* Handle media type filter on change */
   const onMediaTypeChange = (value: MediaType) => {
-    console.log("type: ", value);
     setMediaFilter({ ...mediaFilter, sort: null, type: value });
   };
 
+  /* Handle media status filter on change */
   const onMediaStatusChange = (value: MediaListStatus) => {
-    console.log("status: ", value);
     setMediaFilter({ ...mediaFilter, sort: null, status: value });
   };
 
@@ -63,7 +63,7 @@ const MediaList: React.FC<MediaListProps> = ({
             onChange={onMediaStatusChange}
           >
             {statusList.map((status) => (
-              <Select.Option value={status}>
+              <Select.Option value={status} key={status}>
                 {capitalizeFirstLetter(status)}
               </Select.Option>
             ))}
