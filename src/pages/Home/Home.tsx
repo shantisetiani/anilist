@@ -33,6 +33,7 @@ const Home: React.FC<HomeProps> = ({ mediaTrend, airing, recommendation }) => {
             >
               <Card hoverable={true}>
                 <img
+                  alt="Media Trend"
                   src={
                     mediaTrend.MediaTrend.media?.coverImage?.extraLarge || ""
                   }
@@ -64,6 +65,7 @@ const Home: React.FC<HomeProps> = ({ mediaTrend, airing, recommendation }) => {
             >
               <Card hoverable={true}>
                 <img
+                  alt="Media Airing"
                   src={
                     airing.AiringSchedule.media?.coverImage?.extraLarge || ""
                   }
@@ -93,6 +95,7 @@ const Home: React.FC<HomeProps> = ({ mediaTrend, airing, recommendation }) => {
             >
               <Card hoverable={true}>
                 <img
+                  alt="Media Recommendation"
                   src={
                     recommendation.Recommendation.media.coverImage
                       ?.extraLarge || ""
@@ -116,6 +119,7 @@ const Home: React.FC<HomeProps> = ({ mediaTrend, airing, recommendation }) => {
             >
               <Card hoverable={true}>
                 <img
+                  alt="Media Recommendation"
                   src={
                     recommendation.Recommendation.mediaRecommendation.coverImage
                       ?.extraLarge || ""

@@ -45,6 +45,7 @@ const HomeContainer: React.FC = () => {
     if (mediaTrendError || airingError || recommendationError) {
       alertContext.setAlert(true);
     }
+    // eslint-disable-next-line
   }, [mediaTrendError, airingError, recommendationError]);
 
   /* Show skeleton while loading */

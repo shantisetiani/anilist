@@ -28,6 +28,11 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 Launches the test runner in the interactive watch mode.<br />
 <br /><br />
 
+### `npm run codegen`
+
+Generates all GraphQl queries in `query` folder.<br />
+<br /><br />
+
 ---
 
 ## Folder Structure
@@ -66,4 +71,6 @@ Launches the test runner in the interactive watch mode.<br />
     │   ├── index.tsx                           # Rendering ReactDOM and Apollo provider
     │   ├── setupTests.js                       # Setup for testing purpose
     │   └── ...
+    ├── env.example                             # Setting of the environment (copy, paste, and rename it to ".env")
+    ├── codegen.yml                             # Configuration of GraphQl code generator
     └── ...

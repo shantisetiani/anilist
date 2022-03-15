@@ -29,6 +29,7 @@ const MediaListContainer: React.FC = () => {
     if (listError) {
       alertContext.setAlert(true);
     }
+    // eslint-disable-next-line
   }, [listError]);
 
   return (

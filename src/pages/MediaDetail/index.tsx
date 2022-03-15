@@ -30,6 +30,7 @@ const MediaDetailContainer: React.FC = () => {
     if (detailError) {
       alertContext.setAlert(true);
     }
+    // eslint-disable-next-line
   }, [detailError]);
 
   /* Show skeleton while loading */
