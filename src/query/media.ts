@@ -147,3 +147,90 @@ export const MEDIA_DETAIL = gql`
     }
   }
 `;
+
+export const MEDIA_TREND = gql`
+  query MediaTrend($sort: [MediaTrendSort]) {
+    MediaTrend(sort: $sort) {
+      trending
+      media {
+        id
+        coverImage {
+          extraLarge
+          large
+          medium
+          color
+        }
+        title {
+          romaji
+          english
+          native
+          userPreferred
+        }
+      }
+    }
+  }
+`;
+
+export const RECOMMENDATION = gql`
+  query Recommendation($sort: [RecommendationSort]) {
+    Recommendation(sort: $sort) {
+      id
+      media {
+        id
+        coverImage {
+          extraLarge
+          large
+          medium
+          color
+        }
+        title {
+          romaji
+          english
+          native
+          userPreferred
+        }
+      }
+      mediaRecommendation {
+        id
+        coverImage {
+          extraLarge
+          large
+          medium
+          color
+        }
+        title {
+          romaji
+          english
+          native
+          userPreferred
+        }
+      }
+    }
+  }
+`;
+
+export const AIRING_SCHEDULE = gql`
+  query AiringSchedule($notYetAired: Boolean) {
+    AiringSchedule(notYetAired: $notYetAired) {
+      id
+      airingAt
+      timeUntilAiring
+      episode
+      media {
+        id
+        coverImage {
+          extraLarge
+          large
+          medium
+          color
+        }
+        title {
+          romaji
+          english
+          native
+          userPreferred
+        }
+      }
+    }
+  }
+`;

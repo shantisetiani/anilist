@@ -76,15 +76,10 @@ function App() {
 
     return (
       <Header className="flex-container" style={{ backgroundColor: "#4000c3" }}>
-        <Link to={ROUTES.MEDIA_LIST}>
+        <Link to={ROUTES.HOME}>
           <h1 className="app-logo">Anilist</h1>
         </Link>
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={["2"]}
-          color="#4000c3"
-        >
+        <Menu theme="dark" mode="horizontal" color="#4000c3">
           <Link to={ROUTES.MEDIA_LIST}>
             <Menu.Item key="menu_list">Menu List</Menu.Item>
           </Link>
@@ -102,7 +97,7 @@ function App() {
         </Content>
         <Footer
           style={{
-            backgroundColor: "#000",
+            backgroundColor: "#4000c3",
             color: "white",
             textAlign: "center",
           }}

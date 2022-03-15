@@ -1,8 +1,9 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { Row, Col, Image, Spin, Card, Tabs, Divider, Space, Tag } from "antd";
+import { Row, Col, Image, Card, Tabs, Divider, Tag } from "antd";
 import { useMediaDetailQuery } from "generated/graphql";
 import { toDateHourString, toMonthString } from "utilities/date";
+import MediaDetailSkeleton from "./skeleton";
 import "./style.css";
 
 interface MediaDetailProps {
@@ -21,7 +22,17 @@ const MediaDetail = () => {
     variables: { id: props.id },
   });
 
-  console.log(mediaDetail?.Media);
+  if (detailLoading) {
+    return <MediaDetailSkeleton />;
+  }
+
+  const ratedRank = mediaDetail?.Media?.rankings?.find(
+    (rank) => rank?.allTime && rank.type === "RATED"
+  );
+
+  const popularRank = mediaDetail?.Media?.rankings?.find(
+    (rank) => rank?.allTime && rank.type === "POPULAR"
+  );
 
   const renderDetails = () =>
     mediaDetail?.Media && (
@@ -37,35 +48,25 @@ const MediaDetail = () => {
             <Col xs={6} className="text-center highlight-card-content">
               <div className="small-title">Score</div>
               <div className="hightlited-content">
-                {mediaDetail.Media.averageScore}
+                {mediaDetail.Media.averageScore || "-"}
               </div>
             </Col>
             <Col xs={6} className="text-center highlight-card-content">
               <div className="small-title">Rated Rank</div>
               <div className="hightlited-content">
-                #
-                {
-                  mediaDetail.Media.rankings?.find(
-                    (rank) => rank?.allTime && rank.type === "RATED"
-                  )?.rank
-                }
+                {ratedRank ? `#${ratedRank.rank}` : "-"}
               </div>
             </Col>
             <Col xs={6} className="text-center highlight-card-content">
               <div className="small-title">Popular Rank</div>
               <div className="hightlited-content">
-                #
-                {
-                  mediaDetail.Media.rankings?.find(
-                    (rank) => rank?.allTime && rank.type === "POPULAR"
-                  )?.rank
-                }
+                {popularRank ? `#${popularRank.rank}` : "-"}
               </div>
             </Col>
             <Col xs={6} className="text-center highlight-card-content">
               <div className="small-title">Popularity</div>
               <div className="hightlited-content">
-                {mediaDetail.Media.popularity}
+                {mediaDetail.Media.popularity || "-"}
               </div>
             </Col>
           </Row>
@@ -133,52 +134,57 @@ const MediaDetail = () => {
     <>
       <h3 style={{ margin: 0 }}>Reviews</h3>
       <Divider className="header-divider" />
-      {mediaDetail?.Media?.reviews?.nodes?.map((review) => (
-        <>
-          {review?.user && (
-            <>
-              <Row>
-                <Col xs={12} sm={16} md={18}>
-                  <div>
-                    <strong>{review.user.name}</strong>
-                  </div>
-                  <div className="grayed-caption">
-                    <b>{review.ratingAmount}</b>&nbsp;people found this review
-                    helpful
-                  </div>
-                </Col>
-                <Col xs={12} sm={8} md={6}>
-                  <div className="float-right">
-                    {toDateHourString(review.createdAt)}
-                  </div>
-                  <div className="float-right">Score: {review.score}</div>
-                </Col>
-              </Row>
-              <Divider
-                style={{
-                  margin: "12px 0",
-                }}
-              />
-            </>
-          )}
-          <Row>
-            <Col span={24}>
-              <p>
-                <b>{review?.summary}</b>
-              </p>
-              <p className="ellipsis-paragraph">{review?.body}</p>
-            </Col>
-          </Row>
-          {review?.updatedAt && (
+      {mediaDetail?.Media?.reviews?.nodes &&
+      mediaDetail.Media.reviews.nodes.length > 0 ? (
+        mediaDetail.Media.reviews.nodes.map((review) => (
+          <>
+            {review?.user && (
+              <>
+                <Row>
+                  <Col xs={12} sm={16} md={18}>
+                    <div>
+                      <strong>{review.user.name}</strong>
+                    </div>
+                    <div className="grayed-caption">
+                      <b>{review.ratingAmount}</b>&nbsp;people found this review
+                      helpful
+                    </div>
+                  </Col>
+                  <Col xs={12} sm={8} md={6}>
+                    <div className="float-right">
+                      {toDateHourString(review.createdAt)}
+                    </div>
+                    <div className="float-right">Score: {review.score}</div>
+                  </Col>
+                </Row>
+                <Divider
+                  style={{
+                    margin: "12px 0",
+                  }}
+                />
+              </>
+            )}
             <Row>
-              <Col span={24} className="edited-at text-right">
-                Edited at: {toDateHourString(review.updatedAt)}
+              <Col span={24}>
+                <p>
+                  <b>{review?.summary}</b>
+                </p>
+                <p className="ellipsis-paragraph">{review?.body}</p>
               </Col>
             </Row>
-          )}
-          <Divider className="row-divider" style={{ margin: "24px 0" }} />
-        </>
-      ))}
+            {review?.updatedAt && (
+              <Row>
+                <Col span={24} className="edited-at text-right">
+                  Edited at: {toDateHourString(review.updatedAt)}
+                </Col>
+              </Row>
+            )}
+            <Divider className="row-divider" style={{ margin: "24px 0" }} />
+          </>
+        ))
+      ) : (
+        <div>No reviews yet.</div>
+      )}
     </>
   );
 
@@ -190,11 +196,7 @@ const MediaDetail = () => {
 
   return (
     <div>
-      {detailLoading ? (
-        <div className="text-center">
-          <Spin size="large" />
-        </div>
-      ) : mediaDetail?.Media ? (
+      {mediaDetail?.Media && (
         <Row gutter={[24, 12]}>
           <Col
             span={24}
@@ -204,7 +206,7 @@ const MediaDetail = () => {
             <h1 style={{ margin: 0 }}>
               {mediaDetail.Media.title?.userPreferred}
             </h1>
-            {mediaDetail?.Media.isAdult && (
+            {mediaDetail.Media.isAdult && (
               <span className="adult-badge">18+</span>
             )}
           </Col>
@@ -292,12 +294,6 @@ const MediaDetail = () => {
                 {renderReviews()}
               </Tabs.TabPane>
             </Tabs>
-          </Col>
-        </Row>
-      ) : (
-        <Row>
-          <Col span={24} className="text-center">
-            No Data
           </Col>
         </Row>
       )}

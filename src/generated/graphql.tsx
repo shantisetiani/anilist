@@ -4679,6 +4679,27 @@ export type MediaDetailQueryVariables = Exact<{
 
 export type MediaDetailQuery = { __typename?: 'Query', Media?: { __typename?: 'Media', id: number, type?: MediaType | null, format?: MediaFormat | null, status?: MediaStatus | null, description?: string | null, season?: MediaSeason | null, episodes?: number | null, duration?: number | null, chapters?: number | null, volumes?: number | null, countryOfOrigin?: any | null, bannerImage?: string | null, genres?: Array<string | null> | null, averageScore?: number | null, popularity?: number | null, isAdult?: boolean | null, siteUrl?: string | null, title?: { __typename?: 'MediaTitle', romaji?: string | null, english?: string | null, native?: string | null, userPreferred?: string | null } | null, startDate?: { __typename?: 'FuzzyDate', year?: number | null, month?: number | null, day?: number | null } | null, endDate?: { __typename?: 'FuzzyDate', year?: number | null, month?: number | null, day?: number | null } | null, tags?: Array<{ __typename?: 'MediaTag', id: number, name: string } | null> | null, trailer?: { __typename?: 'MediaTrailer', id?: string | null } | null, coverImage?: { __typename?: 'MediaCoverImage', extraLarge?: string | null, large?: string | null, medium?: string | null, color?: string | null } | null, characters?: { __typename?: 'CharacterConnection', nodes?: Array<{ __typename?: 'Character', id: number, favourites?: number | null, image?: { __typename?: 'CharacterImage', large?: string | null, medium?: string | null } | null, name?: { __typename?: 'CharacterName', first?: string | null, middle?: string | null, last?: string | null, full?: string | null, native?: string | null, userPreferred?: string | null } | null } | null> | null } | null, staff?: { __typename?: 'StaffConnection', nodes?: Array<{ __typename?: 'Staff', id: number, primaryOccupations?: Array<string | null> | null, favourites?: number | null, image?: { __typename?: 'StaffImage', large?: string | null, medium?: string | null } | null, name?: { __typename?: 'StaffName', first?: string | null, middle?: string | null, last?: string | null, full?: string | null, native?: string | null, userPreferred?: string | null } | null } | null> | null } | null, studios?: { __typename?: 'StudioConnection', nodes?: Array<{ __typename?: 'Studio', id: number, name: string } | null> | null } | null, airingSchedule?: { __typename?: 'AiringScheduleConnection', edges?: Array<{ __typename?: 'AiringScheduleEdge', id?: number | null } | null> | null } | null, rankings?: Array<{ __typename?: 'MediaRank', id: number, type: MediaRankType, allTime?: boolean | null, rank: number } | null> | null, reviews?: { __typename?: 'ReviewConnection', nodes?: Array<{ __typename?: 'Review', id: number, summary?: string | null, body?: string | null, userRating?: ReviewRating | null, ratingAmount?: number | null, score?: number | null, createdAt: number, updatedAt: number, user?: { __typename?: 'User', id: number, name: string } | null } | null> | null } | null, externalLinks?: Array<{ __typename?: 'MediaExternalLink', id: number } | null> | null } | null };
 
+export type MediaTrendQueryVariables = Exact<{
+  sort?: InputMaybe<Array<InputMaybe<MediaTrendSort>> | InputMaybe<MediaTrendSort>>;
+}>;
+
+
+export type MediaTrendQuery = { __typename?: 'Query', MediaTrend?: { __typename?: 'MediaTrend', trending: number, media?: { __typename?: 'Media', id: number, coverImage?: { __typename?: 'MediaCoverImage', extraLarge?: string | null, large?: string | null, medium?: string | null, color?: string | null } | null, title?: { __typename?: 'MediaTitle', romaji?: string | null, english?: string | null, native?: string | null, userPreferred?: string | null } | null } | null } | null };
+
+export type RecommendationQueryVariables = Exact<{
+  sort?: InputMaybe<Array<InputMaybe<RecommendationSort>> | InputMaybe<RecommendationSort>>;
+}>;
+
+
+export type RecommendationQuery = { __typename?: 'Query', Recommendation?: { __typename?: 'Recommendation', id: number, media?: { __typename?: 'Media', id: number, coverImage?: { __typename?: 'MediaCoverImage', extraLarge?: string | null, large?: string | null, medium?: string | null, color?: string | null } | null, title?: { __typename?: 'MediaTitle', romaji?: string | null, english?: string | null, native?: string | null, userPreferred?: string | null } | null } | null, mediaRecommendation?: { __typename?: 'Media', id: number, coverImage?: { __typename?: 'MediaCoverImage', extraLarge?: string | null, large?: string | null, medium?: string | null, color?: string | null } | null, title?: { __typename?: 'MediaTitle', romaji?: string | null, english?: string | null, native?: string | null, userPreferred?: string | null } | null } | null } | null };
+
+export type AiringScheduleQueryVariables = Exact<{
+  notYetAired?: InputMaybe<Scalars['Boolean']>;
+}>;
+
+
+export type AiringScheduleQuery = { __typename?: 'Query', AiringSchedule?: { __typename?: 'AiringSchedule', id: number, airingAt: number, timeUntilAiring: number, episode: number, media?: { __typename?: 'Media', id: number, coverImage?: { __typename?: 'MediaCoverImage', extraLarge?: string | null, large?: string | null, medium?: string | null, color?: string | null } | null, title?: { __typename?: 'MediaTitle', romaji?: string | null, english?: string | null, native?: string | null, userPreferred?: string | null } | null } | null } | null };
+
 
 export const MediaListDocument = gql`
     query MediaList($sort: [MediaListSort]) {
@@ -4882,3 +4903,171 @@ export function useMediaDetailLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type MediaDetailQueryHookResult = ReturnType<typeof useMediaDetailQuery>;
 export type MediaDetailLazyQueryHookResult = ReturnType<typeof useMediaDetailLazyQuery>;
 export type MediaDetailQueryResult = Apollo.QueryResult<MediaDetailQuery, MediaDetailQueryVariables>;
+export const MediaTrendDocument = gql`
+    query MediaTrend($sort: [MediaTrendSort]) {
+  MediaTrend(sort: $sort) {
+    trending
+    media {
+      id
+      coverImage {
+        extraLarge
+        large
+        medium
+        color
+      }
+      title {
+        romaji
+        english
+        native
+        userPreferred
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useMediaTrendQuery__
+ *
+ * To run a query within a React component, call `useMediaTrendQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMediaTrendQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMediaTrendQuery({
+ *   variables: {
+ *      sort: // value for 'sort'
+ *   },
+ * });
+ */
+export function useMediaTrendQuery(baseOptions?: Apollo.QueryHookOptions<MediaTrendQuery, MediaTrendQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MediaTrendQuery, MediaTrendQueryVariables>(MediaTrendDocument, options);
+      }
+export function useMediaTrendLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MediaTrendQuery, MediaTrendQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MediaTrendQuery, MediaTrendQueryVariables>(MediaTrendDocument, options);
+        }
+export type MediaTrendQueryHookResult = ReturnType<typeof useMediaTrendQuery>;
+export type MediaTrendLazyQueryHookResult = ReturnType<typeof useMediaTrendLazyQuery>;
+export type MediaTrendQueryResult = Apollo.QueryResult<MediaTrendQuery, MediaTrendQueryVariables>;
+export const RecommendationDocument = gql`
+    query Recommendation($sort: [RecommendationSort]) {
+  Recommendation(sort: $sort) {
+    id
+    media {
+      id
+      coverImage {
+        extraLarge
+        large
+        medium
+        color
+      }
+      title {
+        romaji
+        english
+        native
+        userPreferred
+      }
+    }
+    mediaRecommendation {
+      id
+      coverImage {
+        extraLarge
+        large
+        medium
+        color
+      }
+      title {
+        romaji
+        english
+        native
+        userPreferred
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useRecommendationQuery__
+ *
+ * To run a query within a React component, call `useRecommendationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useRecommendationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useRecommendationQuery({
+ *   variables: {
+ *      sort: // value for 'sort'
+ *   },
+ * });
+ */
+export function useRecommendationQuery(baseOptions?: Apollo.QueryHookOptions<RecommendationQuery, RecommendationQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<RecommendationQuery, RecommendationQueryVariables>(RecommendationDocument, options);
+      }
+export function useRecommendationLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<RecommendationQuery, RecommendationQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<RecommendationQuery, RecommendationQueryVariables>(RecommendationDocument, options);
+        }
+export type RecommendationQueryHookResult = ReturnType<typeof useRecommendationQuery>;
+export type RecommendationLazyQueryHookResult = ReturnType<typeof useRecommendationLazyQuery>;
+export type RecommendationQueryResult = Apollo.QueryResult<RecommendationQuery, RecommendationQueryVariables>;
+export const AiringScheduleDocument = gql`
+    query AiringSchedule($notYetAired: Boolean) {
+  AiringSchedule(notYetAired: $notYetAired) {
+    id
+    airingAt
+    timeUntilAiring
+    episode
+    media {
+      id
+      coverImage {
+        extraLarge
+        large
+        medium
+        color
+      }
+      title {
+        romaji
+        english
+        native
+        userPreferred
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useAiringScheduleQuery__
+ *
+ * To run a query within a React component, call `useAiringScheduleQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAiringScheduleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAiringScheduleQuery({
+ *   variables: {
+ *      notYetAired: // value for 'notYetAired'
+ *   },
+ * });
+ */
+export function useAiringScheduleQuery(baseOptions?: Apollo.QueryHookOptions<AiringScheduleQuery, AiringScheduleQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AiringScheduleQuery, AiringScheduleQueryVariables>(AiringScheduleDocument, options);
+      }
+export function useAiringScheduleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AiringScheduleQuery, AiringScheduleQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AiringScheduleQuery, AiringScheduleQueryVariables>(AiringScheduleDocument, options);
+        }
+export type AiringScheduleQueryHookResult = ReturnType<typeof useAiringScheduleQuery>;
+export type AiringScheduleLazyQueryHookResult = ReturnType<typeof useAiringScheduleLazyQuery>;
+export type AiringScheduleQueryResult = Apollo.QueryResult<AiringScheduleQuery, AiringScheduleQueryVariables>;
