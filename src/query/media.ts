@@ -1,8 +1,12 @@
 import { gql } from "@apollo/client";
 
 export const MEDIA_LIST = gql`
-  query MediaList($sort: [MediaListSort]) {
-    MediaList(sort: $sort) {
+  query MediaList(
+    $sort: [MediaListSort]
+    $type: MediaType
+    $status: MediaListStatus
+  ) {
+    MediaList(sort: $sort, type: $type, status: $status) {
       id
       userId
       mediaId

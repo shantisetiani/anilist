@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { Row, Col, Image, Card, Tabs, Divider, Tag } from "antd";
 import { useMediaDetailQuery } from "generated/graphql";
 import { toDateHourString, toMonthString } from "utilities/date";
+import ErrorPage from "pages/ErrorPage";
 import MediaDetailSkeleton from "./skeleton";
 import "./style.css";
 
@@ -21,6 +22,10 @@ const MediaDetail = () => {
   } = useMediaDetailQuery({
     variables: { id: props.id },
   });
+
+  if (detailError) {
+    return <ErrorPage />;
+  }
 
   if (detailLoading) {
     return <MediaDetailSkeleton />;

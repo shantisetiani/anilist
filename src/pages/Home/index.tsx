@@ -10,6 +10,7 @@ import {
   useAiringScheduleQuery,
 } from "generated/graphql";
 import { toDateHourString } from "utilities/date";
+import ErrorPage from "pages/ErrorPage";
 import HomeSkeleton from "./skeleton";
 import "./style.css";
 
@@ -37,6 +38,10 @@ const Home = () => {
   } = useRecommendationQuery({
     variables: { sort: RecommendationSort.RatingDesc },
   });
+
+  if (mediaTrendError || airingError || recommendationError) {
+    return <ErrorPage />;
+  }
 
   if (mediaTrendLoading || airingLoading || recommendationLoading) {
     return <HomeSkeleton />;

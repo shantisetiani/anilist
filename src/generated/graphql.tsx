@@ -4667,6 +4667,8 @@ export type YearStats = {
 
 export type MediaListQueryVariables = Exact<{
   sort?: InputMaybe<Array<InputMaybe<MediaListSort>> | InputMaybe<MediaListSort>>;
+  type?: InputMaybe<MediaType>;
+  status?: InputMaybe<MediaListStatus>;
 }>;
 
 
@@ -4702,8 +4704,8 @@ export type AiringScheduleQuery = { __typename?: 'Query', AiringSchedule?: { __t
 
 
 export const MediaListDocument = gql`
-    query MediaList($sort: [MediaListSort]) {
-  MediaList(sort: $sort) {
+    query MediaList($sort: [MediaListSort], $type: MediaType, $status: MediaListStatus) {
+  MediaList(sort: $sort, type: $type, status: $status) {
     id
     userId
     mediaId
@@ -4736,6 +4738,8 @@ export const MediaListDocument = gql`
  * const { data, loading, error } = useMediaListQuery({
  *   variables: {
  *      sort: // value for 'sort'
+ *      type: // value for 'type'
+ *      status: // value for 'status'
  *   },
  * });
  */
