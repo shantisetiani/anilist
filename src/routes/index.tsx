@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "pages/Home";
-import MediaList from "pages/MediaList";
-import MediaDetail from "pages/MediaDetail";
+import HomeContainer from "pages/Home";
+import MediaListContainer from "pages/MediaList";
+import MediaDetailContainer from "pages/MediaDetail";
 
 const SITE_URL = process.env.PUBLIC_URL;
 
@@ -15,18 +15,18 @@ export const ROUTE_CONFIG = [
   {
     path: ROUTES.HOME,
     key: "home",
-    element: <Home />,
+    element: <HomeContainer />,
   },
   {
     path: ROUTES.MEDIA_LIST,
     key: "mediaList",
-    element: <MediaList />,
+    element: <MediaListContainer />,
     name: "Media List",
   },
   {
     path: ROUTES.MEDIA_DETAIL,
     key: "mediaDetail",
-    element: <MediaDetail />,
+    element: <MediaDetailContainer />,
   },
 ];
 
